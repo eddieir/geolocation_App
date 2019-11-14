@@ -1,5 +1,6 @@
+/// <reference types="@types/googlemaps" />
 import { Component, ViewChild } from '@angular/core';
-import { } from 'googlemaps';
+//import { } from 'googlemaps';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +9,7 @@ import { } from 'googlemaps';
 })
 export class AppComponent {
 
-  @ViewChild('gmap') gmapElement: any;
+  @ViewChild('gmap', {static: true}) private gmapElement: any;
   map: google.maps.Map;
 
   isTracking = false;
@@ -19,7 +20,7 @@ export class AppComponent {
   marker: google.maps.Marker;
 
   ngOnInit() {
-    var mapProp = {
+    const mapProp = {
       center: new google.maps.LatLng(45.057801, 7.681040),
       zoom: 10,
       mapTypeId: google.maps.MapTypeId.ROADMAP
@@ -33,7 +34,7 @@ export class AppComponent {
         this.showPosition(position);
       });
     } else {
-      alert("Geolocation is not supported by this browser.");
+      alert('Geolocation is not supported by this browser.');
     }
   }
 
@@ -41,7 +42,7 @@ export class AppComponent {
     this.currentLat = position.coords.latitude;
     this.currentLong = position.coords.longitude;
 
-    let location = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+    const location = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
     this.map.panTo(location);
 
     if (!this.marker) {
@@ -50,8 +51,7 @@ export class AppComponent {
         map: this.map,
         title: 'Got you!'
       });
-    }
-    else {
+    } else {
       this.marker.setPosition(location);
     }
   }
@@ -63,7 +63,7 @@ export class AppComponent {
         this.showTrackingPosition(position);
       });
     } else {
-      alert("Geolocation is not supported by this browser.");
+      alert('Geolocation is not supported by this browser.');
     }
   }
 
@@ -72,7 +72,7 @@ export class AppComponent {
     this.currentLat = position.coords.latitude;
     this.currentLong = position.coords.longitude;
 
-    let location = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+    const location = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
     this.map.panTo(location);
 
     if (!this.marker) {
@@ -81,8 +81,7 @@ export class AppComponent {
         map: this.map,
         title: 'Got you!'
       });
-    }
-    else {
+    } else {
       this.marker.setPosition(location);
     }
   }
